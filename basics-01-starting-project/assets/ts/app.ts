@@ -27,6 +27,7 @@ function operations(operator: string, message: string = ""): void {
     userInp,
     message
   );
+  currentResult = roundResult();
   outputResult(currentResult.toString(), additionalMessage);
 }
 
@@ -34,7 +35,7 @@ function operations(operator: string, message: string = ""): void {
  * Get and check user input.
  */
 function getUserInput(): number {
-  return userInput ? parseInt(userInput.value) : 0;
+  return userInput ? parseFloat(userInput.value) : 0;
 }
 
 /**
@@ -54,6 +55,9 @@ function getMessage(
   return `${prevResult} ${operator} ${userInp} ${message}`;
 }
 
+function roundResult(prescision: number = 1): number {
+  return parseFloat(currentResult.toFixed(prescision));
+}
 /**
  * Add operation.
  */
