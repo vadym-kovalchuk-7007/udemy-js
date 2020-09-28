@@ -4,7 +4,7 @@ let currentResult: number = 0;
  * All operators in one place.
  * @param operator Divide, substract, etc.
  */
-function operations(operator: string): void {
+function operations(operator: string, message: string = ""): void {
   const userInp: number = getUserInput();
   const prevResult: number = currentResult;
   switch (operator) {
@@ -21,13 +21,13 @@ function operations(operator: string): void {
       currentResult /= userInp;
       break;
   }
-  const message: string = getMessage(
+  const additionalMessage: string = getMessage(
     operator,
     prevResult,
     userInp,
-    "My message"
+    message
   );
-  outputResult(currentResult.toString(), message);
+  outputResult(currentResult.toString(), additionalMessage);
 }
 
 /**
@@ -49,7 +49,7 @@ function getMessage(
   operator: string,
   prevResult: number,
   userInp: number,
-  message: string = ""
+  message: string
 ): string {
   return `${prevResult} ${operator} ${userInp} ${message}`;
 }

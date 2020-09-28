@@ -1,6 +1,7 @@
 "use strict";
 var currentResult = 0;
-function operations(operator) {
+function operations(operator, message) {
+    if (message === void 0) { message = ""; }
     var userInp = getUserInput();
     var prevResult = currentResult;
     switch (operator) {
@@ -17,14 +18,13 @@ function operations(operator) {
             currentResult /= userInp;
             break;
     }
-    var message = getMessage(operator, prevResult, userInp, "My message");
-    outputResult(currentResult.toString(), message);
+    var additionalMessage = getMessage(operator, prevResult, userInp, message);
+    outputResult(currentResult.toString(), additionalMessage);
 }
 function getUserInput() {
     return userInput ? parseInt(userInput.value) : 0;
 }
 function getMessage(operator, prevResult, userInp, message) {
-    if (message === void 0) { message = ""; }
     return prevResult + " " + operator + " " + userInp + " " + message;
 }
 function add() {
