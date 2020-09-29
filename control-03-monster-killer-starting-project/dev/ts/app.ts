@@ -42,6 +42,11 @@ function userInputMaxLife(userInputValue: string | null): number {
   return userInputValue && (value = parseInt(userInputValue))
     ? Math.abs(value)
     : DEFAULT_MAX_LIFE_VALUE;
+    /*
+    Or try throw new Error(""); || throw {message: "error msg"} catch(error);
+    */
+    )
+
 }
 /**
  * Attack monster and give monster's feedback.
