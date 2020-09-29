@@ -1,63 +1,13 @@
 let currentResult: number = 0;
+type messageObject = {
+  operator: string;
+  prevResult: number;
+  userInput: number;
+  message: string;
+  currentResult: number;
+};
+let historyOfOperations: messageObject[] = [];
 
-/**
- * All operators in one place.
- * @param operator Divide, substract, etc.
- */
-function operations(operator: string, message: string = ""): void {
-  const userInp: number = getUserInput();
-  const prevResult: number = currentResult;
-  switch (operator) {
-    case "+":
-      currentResult += userInp;
-      break;
-    case "-":
-      currentResult -= userInp;
-      break;
-    case "*":
-      currentResult *= userInp;
-      break;
-    case "/":
-      currentResult /= userInp;
-      break;
-  }
-  const additionalMessage: string = getMessage(
-    operator,
-    prevResult,
-    userInp,
-    message
-  );
-  currentResult = roundResult();
-  outputResult(currentResult.toString(), additionalMessage);
-}
-
-/**
- * Get and check user input.
- */
-function getUserInput(): number {
-  return userInput ? parseFloat(userInput.value) : 0;
-}
-
-/**
- * Combine message for user.
- *
- * @param operator
- * @param prevResult
- * @param userInp
- * @param message
- */
-function getMessage(
-  operator: string,
-  prevResult: number,
-  userInp: number,
-  message: string
-): string {
-  return `${prevResult} ${operator} ${userInp} ${message}`;
-}
-
-function roundResult(prescision: number = 1): number {
-  return parseFloat(currentResult.toFixed(prescision));
-}
 /**
  * Add operation.
  */
