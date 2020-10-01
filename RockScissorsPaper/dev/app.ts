@@ -90,10 +90,10 @@ class Game implements Gaming {
     let message = this.messageDraw;
     switch (this.userInput) {
       case Elements.paper:
-        if (
-          this.defaultComputerChoice === Elements.rock ||
-          this.defaultComputerChoice === Elements.scissors
-        ) {
+        if (this.defaultComputerChoice === Elements.rock) {
+          message = this.messageUserWon;
+        }
+        if (this.defaultComputerChoice === Elements.scissors) {
           message = this.messageComputerWon;
         }
         break;
