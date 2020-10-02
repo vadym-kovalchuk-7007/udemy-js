@@ -1,0 +1,12 @@
+"use strict";
+var task1v01 = document.getElementById("task-1");
+task1v01.style.color = "#FFFFFF";
+var task1v02 = document.querySelector("ol li:first-child");
+task1v02.style.backgroundColor = "#000000";
+var task2v01 = document.querySelector("title");
+var titleText = "Assignment - Solved!";
+document.title = titleText;
+var docTitle = document.title;
+task2v01.textContent = titleText;
+// console.log(docTitle === task2v01.textContent);
+document.querySelector("h1").textContent = titleText;
