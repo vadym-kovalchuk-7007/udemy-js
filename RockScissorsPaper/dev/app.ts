@@ -3,13 +3,22 @@ enum Elements {
   paper = "PAPER",
   scissors = "SCISSORS",
 }
+
+enum messages {
+  userWon = "User won",
+  computerWon = "Computer won",
+  draw = "Draw",
+  prompt = "Please choose one of: ",
+}
+
+type keyOfElements = keyof typeof Elements;
 /**
  * Values of enum Elements.
  */
 const valuesOfElements = () => {
   let arr: string[] = [];
   for (const elem in Elements) {
-    arr.push(Elements[elem as keyof typeof Elements]);
+    arr.push(Elements[elem as keyOfElements]);
   }
   return arr;
 };
@@ -39,9 +48,6 @@ class Game implements Gaming {
   userInput = "";
   defaultComputerChoice = "";
   defaultUserChoice = Elements.paper;
-  private messageUserWon = "User won";
-  private messageComputerWon = "Computer won";
-  private messageDraw = "Draw";
 
   constructor() {}
 
@@ -49,7 +55,7 @@ class Game implements Gaming {
    * Getting random computer choice.
    */
   getRandomCompChoice() {
-    return Elements[randomKeyOfElements() as keyof typeof Elements];
+    return Elements[randomKeyOfElements() as keyOfElements];
   }
 
   /**
@@ -71,7 +77,7 @@ class Game implements Gaming {
    * Creating message for user prompt.
    */
   makeMessage4prompt(): string {
-    return "Please, choose one of: " + valuesOfElements();
+    return messages.prompt + valuesOfElements();
   }
 
   /**
@@ -87,14 +93,14 @@ class Game implements Gaming {
    * Check values for getting winner.
    */
   findWinner(): string {
-    let message = this.messageDraw;
+    let message = messages.draw;
     switch (this.userInput) {
       case Elements.paper:
         if (this.defaultComputerChoice === Elements.rock) {
-          message = this.messageUserWon;
+          message = messages.userWon;
         }
         if (this.defaultComputerChoice === Elements.scissors) {
-          message = this.messageComputerWon;
+          message = messages.computerWon;
         }
         break;
       case Elements.rock:
@@ -102,15 +108,15 @@ class Game implements Gaming {
           this.defaultComputerChoice === Elements.paper ||
           this.defaultComputerChoice === Elements.scissors
         ) {
-          message = this.messageUserWon;
+          message = messages.userWon;
         }
         break;
       case Elements.scissors:
         if (this.defaultComputerChoice === Elements.rock) {
-          message = this.messageComputerWon;
+          message = messages.computerWon;
         }
         if (this.defaultComputerChoice === Elements.paper) {
-          message = this.messageUserWon;
+          message = messages.userWon;
         }
         break;
     }

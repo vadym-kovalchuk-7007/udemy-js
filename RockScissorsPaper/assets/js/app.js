@@ -5,6 +5,13 @@ var Elements;
     Elements["paper"] = "PAPER";
     Elements["scissors"] = "SCISSORS";
 })(Elements || (Elements = {}));
+var messages;
+(function (messages) {
+    messages["userWon"] = "User won";
+    messages["computerWon"] = "Computer won";
+    messages["draw"] = "Draw";
+    messages["prompt"] = "Please choose one of: ";
+})(messages || (messages = {}));
 var valuesOfElements = function () {
     var arr = [];
     for (var elem in Elements) {
@@ -23,9 +30,6 @@ var Game = (function () {
         this.userInput = "";
         this.defaultComputerChoice = "";
         this.defaultUserChoice = Elements.paper;
-        this.messageUserWon = "User won";
-        this.messageComputerWon = "Computer won";
-        this.messageDraw = "Draw";
     }
     Game.prototype.getRandomCompChoice = function () {
         return Elements[randomKeyOfElements()];
@@ -38,7 +42,7 @@ var Game = (function () {
             : this.defaultUserChoice;
     };
     Game.prototype.makeMessage4prompt = function () {
-        return "Please, choose one of: " + valuesOfElements();
+        return messages.prompt + valuesOfElements();
     };
     Game.prototype.start = function () {
         this.userInput = this.getAndCheckUserInput();
@@ -46,26 +50,28 @@ var Game = (function () {
         textResult.innerHTML = "Your choice " + this.userInput + ",<br>Computer choice " + this.defaultComputerChoice;
     };
     Game.prototype.findWinner = function () {
-        var message = this.messageDraw;
+        var message = messages.draw;
         switch (this.userInput) {
             case Elements.paper:
-                if (this.defaultComputerChoice === Elements.rock ||
-                    this.defaultComputerChoice === Elements.scissors) {
-                    message = this.messageComputerWon;
+                if (this.defaultComputerChoice === Elements.rock) {
+                    message = messages.userWon;
+                }
+                if (this.defaultComputerChoice === Elements.scissors) {
+                    message = messages.computerWon;
                 }
                 break;
             case Elements.rock:
                 if (this.defaultComputerChoice === Elements.paper ||
                     this.defaultComputerChoice === Elements.scissors) {
-                    message = this.messageUserWon;
+                    message = messages.userWon;
                 }
                 break;
             case Elements.scissors:
                 if (this.defaultComputerChoice === Elements.rock) {
-                    message = this.messageComputerWon;
+                    message = messages.computerWon;
                 }
                 if (this.defaultComputerChoice === Elements.paper) {
-                    message = this.messageUserWon;
+                    message = messages.userWon;
                 }
                 break;
         }

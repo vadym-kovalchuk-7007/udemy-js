@@ -11,17 +11,17 @@ let historyOfOperations: messageObject[] = [];
 /**
  * Add operation.
  */
-function add(): void {
-  operations("+");
+function add(message: string): void {
+  operations("+", message);
 }
 /**
  * Substract operation.
  */
-function substract(): void {
-  operations("-");
+function substract(message: string): void {
+  operations("-", message);
 }
 /* Event listeners */
-addBtn?.addEventListener("click", add);
-subtractBtn?.addEventListener("click", substract);
-divideBtn?.addEventListener("click", () => operations("/"));
-multiplyBtn?.addEventListener("click", () => operations("*"));
+addBtn?.addEventListener("click", add.bind(this, "Adding"));
+subtractBtn?.addEventListener("click", substract.bind(this, "Substracting"));
+divideBtn?.addEventListener("click", () => operations("/")); //weak memory
+multiplyBtn?.addEventListener("click", operations.bind(this, "*", "multiply"));
