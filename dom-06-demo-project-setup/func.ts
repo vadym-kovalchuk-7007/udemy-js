@@ -81,28 +81,29 @@ const addMovie2screen = (newMovie: movie) => {
 };
 
 const addMovieHandler = () => {
-  const [titleValue, imageValue, ratingValue] = [
+  const [title, image, rating] = [
     userInputs[0].value.trim(),
     userInputs[1].value.trim(),
     parseInt(userInputs[2].value.trim()),
   ];
 
-  if (
-    !!!titleValue ||
-    !!!imageValue ||
-    !!!ratingValue ||
-    ratingValue < 1 ||
-    ratingValue > 5
-  ) {
+  if (!!!image || !!!rating || rating < 1 || rating > 5) {
     alert("Provide correct data");
     return;
   }
+  let _title: string = "default";
   const newMovie: movie = {
     id: generateId(),
-    image: imageValue,
-    rating: ratingValue,
-    title: titleValue,
+    image,
+    rating,
+    set title(title: string) {
+      _title = !!!title ? _title : title;
+    },
+    get title(): string {
+      return title;
+    },
   };
+  newMovie.title = title;
   movies.push(newMovie);
   toggleMovieModalHandler();
   clearUserInputs();
@@ -110,10 +111,11 @@ const addMovieHandler = () => {
   showHideEntryTextSection();
 };
 
-const closeConfirmDeleteDialogHandler = () => {
-  if (deleteMovieModal.classList.contains("visible")) {
+const closeConfirmDeleteDialogHandler = function () {
+  const { classList } = deleteMovieModal;
+  if (classList.contains("visible")) {
     toggleBackdrop();
-    deleteMovieModal.classList.remove("visible");
+    classList.remove("visible");
   }
   movieId = "";
 };

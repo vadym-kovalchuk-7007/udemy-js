@@ -79,21 +79,24 @@ var addMovieHandler = function () {
         userInputs[0].value.trim(),
         userInputs[1].value.trim(),
         parseInt(userInputs[2].value.trim()),
-    ], titleValue = _a[0], imageValue = _a[1], ratingValue = _a[2];
-    if (!!!titleValue ||
-        !!!imageValue ||
-        !!!ratingValue ||
-        ratingValue < 1 ||
-        ratingValue > 5) {
+    ], title = _a[0], image = _a[1], rating = _a[2];
+    if (!!!image || !!!rating || rating < 1 || rating > 5) {
         alert("Provide correct data");
         return;
     }
+    var _title = "";
     var newMovie = {
         id: generateId(),
-        image: imageValue,
-        rating: ratingValue,
-        title: titleValue,
+        image: image,
+        rating: rating,
+        set title(title) {
+            _title = !!!title ? "default" : title;
+        },
+        get title() {
+            return _title;
+        },
     };
+    newMovie.title = title;
     movies.push(newMovie);
     toggleMovieModalHandler();
     clearUserInputs();
@@ -101,9 +104,10 @@ var addMovieHandler = function () {
     showHideEntryTextSection();
 };
 var closeConfirmDeleteDialogHandler = function () {
-    if (deleteMovieModal.classList.contains("visible")) {
+    var classList = deleteMovieModal.classList;
+    if (classList.contains("visible")) {
         toggleBackdrop();
-        deleteMovieModal.classList.remove("visible");
+        classList.remove("visible");
     }
     movieId = "";
 };
