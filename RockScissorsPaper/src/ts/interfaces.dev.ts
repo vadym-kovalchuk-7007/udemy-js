@@ -1,4 +1,4 @@
-import { Elements } from "./variables.js";
+import { Elements } from "./variables";
 export interface Gaming {
   userInput: string | Elements;
   defaultComputerChoice: string | Elements;

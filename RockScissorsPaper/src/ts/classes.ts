@@ -1,13 +1,14 @@
 import {
   Elements,
-  messages,
   randomKeyOfElements,
   textResult,
   valuesOfElements,
-} from "./variables.js";
+} from "./variables";
 
-import type { keyOfElements } from "./variables.js";
-import { Gaming } from "./interfaces.js";
+import { messages } from "./messages";
+
+import type { keyOfElements } from "./variables";
+import { Gaming } from "./interfaces.dev";
 export class Game implements Gaming {
   userInput = "";
   defaultComputerChoice = "";
@@ -26,13 +27,13 @@ export class Game implements Gaming {
    * Getting and check user input.
    */
   getAndCheckUserInput(): string {
-    let userPrompt: string | null = prompt(
+    const userPrompt: string | null = prompt(
       this.makeMessage4prompt(),
       this.defaultUserChoice
     );
 
     return userPrompt &&
-      valuesOfElements().indexOf(userPrompt.toUpperCase()) >= 0 //valuesOfElements.includes(userPrompt)
+      valuesOfElements().indexOf(userPrompt.toUpperCase()) >= 0 // valuesOfElements.includes(userPrompt)
       ? userPrompt.toUpperCase()
       : this.defaultUserChoice;
   }
@@ -41,7 +42,7 @@ export class Game implements Gaming {
    * Creating message for user prompt.
    */
   makeMessage4prompt(): string {
-    return messages.prompt + valuesOfElements();
+    return "Please choose one of: " + valuesOfElements();
   }
 
   /**

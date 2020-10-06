@@ -1,6 +1,7 @@
-import { Game } from "./classes.js";
-import { textResult } from "./variables.js";
-let game = new Game();
+import { Game } from "./classes";
+import { textResult } from "./variables";
+
+const game = new Game();
 /**
  * Wrapper for start method.
  */
