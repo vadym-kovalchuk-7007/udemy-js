@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="Tooltip.js"></script>
+    <script src="confirm-link.js"></script>
+    <script src="cust-btn.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <p>some p data</p>
+    <p>
+      AA
+      <tt-tooltip tt-text="Text attribute TT" class="important">
+        Web component!
+      </tt-tooltip>
+      BB
+    </p>
+    <p>A<tt-tooltip tt-text="Text second"> Web component clone!</tt-tooltip></p>
+    <ul>
+      <li>uno</li>
+      <li>Tw</li>
+      <li>
+        <p><tt-tooltip> host-context </tt-tooltip></p>
+      </li>
+      <li><tt-tooltip></tt-tooltip></li>
+      <li>
+        Custom link
+        <a is="uc-confirm-link" href="https://google.com">outside</a>
+      </li>
+    </ul>
+    <cust-btn text="Some text"></cust-btn>
+    <cust-btn>sss</cust-btn>
+  </body>
+</html>
